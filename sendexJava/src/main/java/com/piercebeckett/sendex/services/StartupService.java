@@ -16,15 +16,14 @@ public class StartupService implements ApplicationListener<ApplicationReadyEvent
     @Autowired
     private AreaRepository areaRepository;
 
-    private String file = "./src/main/resources/coordinates.config";
+    private static final String file = "./src/main/resources/coordinates.config";
 
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
-        try {
-            FileReader filereader = new FileReader(file);
-            CSVReader csvReader = new CSVReader(filereader);
-            String[] nextRecord;
+        try (FileReader fileReader = new FileReader(file);
+             CSVReader csvReader = new CSVReader(fileReader);){
 
+            String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
                 Area currentArea = new Area();
                 currentArea.setAreaName(nextRecord[0]);
@@ -33,8 +32,7 @@ public class StartupService implements ApplicationListener<ApplicationReadyEvent
                 areaRepository.save(currentArea);
                 System.out.println(nextRecord[0] + " " + nextRecord[1] + " " + nextRecord[2]);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

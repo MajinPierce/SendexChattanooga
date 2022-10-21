@@ -16,7 +16,7 @@ public class AreaController {
     private AreaService areaService;
 
     @GetMapping("/{areaName}")
-    public ResponseEntity<?> getAreaData(@PathVariable String areaName){
+    public ResponseEntity<String> getAreaData(@PathVariable String areaName){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         headers.add("Allow", "GET");

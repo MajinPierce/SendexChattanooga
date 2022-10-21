@@ -1,14 +1,15 @@
 package com.piercebeckett.sendex.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Area {
 
     @Id
@@ -19,8 +20,6 @@ public class Area {
     private String longitude;
     @JsonFormat(pattern="yyyy-mm-dd")
     private Date updatedAt;
-
-    public Area(){}
 
     @PreUpdate
     protected void onUpdate() {
