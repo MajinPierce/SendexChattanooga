@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AreaRepository extends CrudRepository<Area, String> {
+
+    Area findByAreaName(String areaName);
 }

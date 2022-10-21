@@ -1,9 +1,7 @@
 package com.piercebeckett.sendex.services;
 
-import com.piercebeckett.sendex.SendexApplication;
-import com.piercebeckett.sendex.controller.AreaController;
+import com.piercebeckett.sendex.domain.Area;
 import com.piercebeckett.sendex.repositories.AreaRepository;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -26,15 +24,16 @@ public class AreaService {
     @Value("${OPEN_WEATHER_API_KEY}")
     private String openWeatherApiKey;
 
-    private String openWeatherOneCallUrlFull = "https://api.openweathermap.org/data/3.0/onecall?lat=35.23649&lon=-85.22971&exclude=minutely&units=imperial&appid=";
+    private static final String OPEN_WEATHER_DOMAIN = "https://api.openweathermap.org/data/3.0/onecall?";
 
-    public String getClimbingConditions(String climbingArea){
+    public String getClimbingConditions(String areaName){
         try{
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest  request = HttpRequest.newBuilder(
-                    URI.create(openWeatherOneCallUrlFull + openWeatherApiKey))
+                    URI.create(buildApiUrl(areaName)))
                     .header("Content-Type", "application/json").build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(request);
             System.out.println("OWM Response Code: " + response.statusCode());
             return response.body();
         } catch(Exception e){
@@ -44,5 +43,12 @@ public class AreaService {
 
     private String parseJsonResponse(){
         return null;
+    }
+
+    private String buildApiUrl(String areaName){
+        Area currentArea = areaRepository.findByAreaName(areaName);
+        System.out.println(areaName);
+        return String.format("%slat=%s&lon=%s&exclude=minutely&units=imperial&appid=%s",
+                OPEN_WEATHER_DOMAIN , currentArea.getLatitude(), currentArea.getLongitude(), openWeatherApiKey);
     }
 }

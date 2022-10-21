@@ -14,7 +14,7 @@ public class Area {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String areaName;
     private String latitude;
     private String longitude;
     @JsonFormat(pattern="yyyy-mm-dd")

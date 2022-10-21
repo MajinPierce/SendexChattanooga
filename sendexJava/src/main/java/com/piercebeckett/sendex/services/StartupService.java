@@ -27,7 +27,7 @@ public class StartupService implements ApplicationListener<ApplicationReadyEvent
 
             while ((nextRecord = csvReader.readNext()) != null) {
                 Area currentArea = new Area();
-                currentArea.setName(nextRecord[0]);
+                currentArea.setAreaName(nextRecord[0]);
                 currentArea.setLatitude(nextRecord[1]);
                 currentArea.setLongitude(nextRecord[2]);
                 areaRepository.save(currentArea);
