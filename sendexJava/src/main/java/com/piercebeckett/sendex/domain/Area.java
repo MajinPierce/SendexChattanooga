@@ -1,11 +1,11 @@
 package com.piercebeckett.sendex.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -18,11 +18,13 @@ public class Area {
     private String areaName;
     private String latitude;
     private String longitude;
-    @JsonFormat(pattern="yyyy-mm-dd")
-    private Date updatedAt;
+    private Instant updatedAt;
+    @Column(columnDefinition = "json")
+    @JsonRawValue
+    private String weather;
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = new Date();
+        this.updatedAt = Instant.now();
     }
 }

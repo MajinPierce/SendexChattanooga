@@ -19,9 +19,7 @@ public class SendexApplication implements CommandLineRunner {
 	public SendexApplication(Environment env){this.env = env;}
 
 	@Override
-	public void run(String... args) throws Exception{
-		//System.out.println(openWeatherApiKey);
-	}
+	public void run(String... args) throws Exception{}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SendexApplication.class, args);

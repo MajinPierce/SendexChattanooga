@@ -16,11 +16,16 @@ public class StartupService implements ApplicationListener<ApplicationReadyEvent
     @Autowired
     private AreaRepository areaRepository;
 
-    private static final String file = "./src/main/resources/coordinates.config";
+    private static final String CONFIG_FILE = "./src/main/resources/coordinates.config";
 
+    /**
+     * Initialize climbing area data (name and coordinates) based on config file.
+     * This data is then used to query weather info from open weather map.
+     * @param event     Application Ready Event
+     */
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
-        try (FileReader fileReader = new FileReader(file);
+        try (FileReader fileReader = new FileReader(CONFIG_FILE);
              CSVReader csvReader = new CSVReader(fileReader);){
 
             String[] nextRecord;
