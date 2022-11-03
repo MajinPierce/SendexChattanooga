@@ -15,14 +15,28 @@ import Typography from "@mui/material/Typography";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
+import axios from "axios";
+
+import DashboardContent from "./DashboardContent";
+import { climbingAreas } from "../config/areaConfigData";
 
 const drawerWidth = 240;
 
 function AreaDashboard(props) {
   const { window } = props;
+  const baseURL = "http://localhost:8080/api/";
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openTN, setOpenTN] = React.useState(false);
   const [openAL, setOpenAL] = React.useState(false);
+  const [apiResponse, setApiResponse] = React.useState("");
+  const [currentArea, setCurrentArea] = React.useState("");
+
+  React.useEffect(() => {
+    axios.get(baseURL + "Leda").then((response) => {
+      setApiResponse(response.data);
+      setCurrentArea("Leda");
+    });
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -41,21 +55,13 @@ function AreaDashboard(props) {
     }
   };
 
-  const handleAreaClick = (apiName) => {
-    console.log(apiName);
+  const handleAreaClick = (areaName, apiName) => {
+    axios.get(baseURL + apiName).then((response) => {
+      setApiResponse(response.data);
+      setCurrentArea(areaName);
+    });
+    console.log(areaName);
   };
-
-  const climbingAreas = [
-    { areaName: "Leda", state: "TN", apiName: "Leda" },
-    { areaName: "Foster Falls", state: "TN", apiName: "Fosters" },
-    { areaName: "Tennessee Wall", state: "TN", apiName: "Twall" },
-    { areaName: "Sunset Rock", state: "TN", apiName: "Sunset" },
-    { areaName: "Sandrock", state: "AL", apiName: "Sandrock" },
-    { areaName: "Obed", state: "TN", apiName: "Obed" },
-    { areaName: "Woodcock Cove", state: "TN", apiName: "Woodcock" },
-    { areaName: "King's Bluff", state: "TN", apiName: "KingsBluff" },
-    { areaName: "Horse Pens 40", state: "AL", apiName: "HorsePens" },
-  ];
 
   const drawer = (
     <div>
@@ -69,7 +75,9 @@ function AreaDashboard(props) {
             .filter((area) => area.state === "TN")
             .map((area) => (
               <ListItem key={area.areaName} disablePadding>
-                <ListItemButton onClick={() => handleAreaClick(area.apiName)}>
+                <ListItemButton
+                  onClick={() => handleAreaClick(area.areaName, area.apiName)}
+                >
                   <ListItemText primary={area.areaName} />
                 </ListItemButton>
               </ListItem>
@@ -84,7 +92,9 @@ function AreaDashboard(props) {
             .filter((area) => area.state === "AL")
             .map((area) => (
               <ListItem key={area.areaName} disablePadding>
-                <ListItemButton onClick={() => handleAreaClick(area.apiName)}>
+                <ListItemButton
+                  onClick={() => handleAreaClick(area.areaName, area.apiName)}
+                >
                   <ListItemText primary={area.areaName} />
                 </ListItemButton>
               </ListItem>
@@ -169,21 +179,7 @@ function AreaDashboard(props) {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
+        <DashboardContent name={currentArea} weather={apiResponse.weather} />
       </Box>
     </Box>
   );
