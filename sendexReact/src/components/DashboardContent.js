@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 
+import DailyWeatherChart from "./DailyWeatherChart";
+
 export default function DashboardContent(props) {
   return (
     <Grid
@@ -23,9 +25,7 @@ export default function DashboardContent(props) {
           alignItems="flex-start"
           spacing={2}
         >
-          <Typography paragraph style={{ wordWrap: "break-word" }}>
-            {JSON.stringify(props.weather)}
-          </Typography>
+          <DailyWeatherChart apiResponse={props.apiResponse} />
         </Grid>
       </Grid>
     </Grid>

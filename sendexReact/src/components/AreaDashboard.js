@@ -24,11 +24,11 @@ const drawerWidth = 240;
 
 function AreaDashboard(props) {
   const { window } = props;
-  const baseURL = "http://localhost:8080/api/";
+  const baseURL = "http://192.168.50.143:8080/api/";
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openTN, setOpenTN] = React.useState(false);
   const [openAL, setOpenAL] = React.useState(false);
-  const [apiResponse, setApiResponse] = React.useState("");
+  const [apiResponse, setApiResponse] = React.useState({});
   const [currentArea, setCurrentArea] = React.useState("");
 
   React.useEffect(() => {
@@ -129,7 +129,7 @@ function AreaDashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" noWrap component="div">
-            Sendex
+            Friction Report
           </Typography>
         </Toolbar>
       </AppBar>
@@ -179,7 +179,7 @@ function AreaDashboard(props) {
         }}
       >
         <Toolbar />
-        <DashboardContent name={currentArea} weather={apiResponse.weather} />
+        <DashboardContent name={currentArea} apiResponse={apiResponse} />
       </Box>
     </Box>
   );
