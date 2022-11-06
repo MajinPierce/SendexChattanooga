@@ -4,6 +4,7 @@ import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -12,18 +13,24 @@ import {
 export default function DailyWeatherChart(props) {
   const [dailyWeather, setDailyWeather] = React.useState([{}]);
 
-  /*
   React.useEffect(() => {
-    setDailyWeather(props.apiResponse.weather.daily);
-    //const dates = props.apiResponse.weather.dt.map((dt) => new Date(dt));
-  }, [props]);
-  */
+    if (props.apiResponse.weather !== undefined) {
+      setDailyWeather(props.apiResponse.weather.daily);
+    }
+  }, [props.apiResponse]);
+
+  function formatDate(dt) {
+    return new Date(dt * 1000).toLocaleDateString("en-us", {
+      month: "short",
+      day: "numeric",
+    });
+  }
 
   return (
     <LineChart
+      data={dailyWeather}
       width={600}
       height={400}
-      data={dailyWeather}
       margin={{
         top: 5,
         right: 30,
@@ -32,7 +39,7 @@ export default function DailyWeatherChart(props) {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="dt" />
+      <XAxis dataKey="dt" tickFormatter={formatDate} />
       <YAxis />
       <Tooltip />
       <Legend />
