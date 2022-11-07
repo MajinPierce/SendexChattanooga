@@ -20,7 +20,7 @@ import axios from "axios";
 import DashboardContent from "./DashboardContent";
 import { climbingAreas } from "../config/areaConfigData";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 function AreaDashboard(props) {
   const { window } = props;

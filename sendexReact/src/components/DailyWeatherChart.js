@@ -38,7 +38,7 @@ export default function DailyWeatherChart(props) {
         bottom: 5,
       }}
     >
-      <CartesianGrid strokeDasharray="1" />
+      <CartesianGrid strokeDasharray="2" />
       <XAxis dataKey="dt" tickFormatter={formatDate} />
       <YAxis />
       <Tooltip offset={50} allowEscapeViewBox={{ x: false, y: true }} />
@@ -48,7 +48,7 @@ export default function DailyWeatherChart(props) {
         unit="F"
         type="monotone"
         dataKey="temp.max"
-        stroke="#F45B69"
+        stroke="#C10B29"
         activeDot={{ r: 5 }}
       />
       <Line
@@ -64,7 +64,7 @@ export default function DailyWeatherChart(props) {
         unit="%"
         type="monotone"
         dataKey="humidity"
-        stroke="#629677"
+        stroke="#A882DD"
         activeDot={{ r: 5 }}
       />
       <Line
@@ -80,7 +80,7 @@ export default function DailyWeatherChart(props) {
         unit="%"
         type="monotone"
         dataKey="pop"
-        stroke="#FFE882"
+        stroke="#607744"
         activeDot={{ r: 5 }}
       />
       <Line
@@ -88,7 +88,7 @@ export default function DailyWeatherChart(props) {
         unit="mm/hr"
         type="monotone"
         dataKey="rain"
-        stroke="#8884d8"
+        stroke="#C7EF00"
         activeDot={{ r: 5 }}
       />
       <Line
@@ -111,7 +111,7 @@ export default function DailyWeatherChart(props) {
         unit="mph"
         type="monotone"
         dataKey="wind_speed"
-        stroke="#77A6B6"
+        stroke="#F45B69"
         activeDot={{ r: 5 }}
       />
     </LineChart>

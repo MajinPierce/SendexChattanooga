@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 
 import DailyWeatherChart from "./DailyWeatherChart";
+import SendexValue from "./SendexValue";
 
 export default function DashboardContent(props) {
   return (
@@ -10,17 +11,20 @@ export default function DashboardContent(props) {
       direction="column"
       justifyContent="flex-start"
       alignItems="center"
-      spacing={2}
+      spacing={10}
     >
       <Grid item>
-        <Typography variant="h5" component="div" align="center">
+        <Typography variant="h2" component="div" align="center">
           {props.name}
         </Typography>
       </Grid>
       <Grid item>
+        <SendexValue apiResponse={props.apiResponse} />
+      </Grid>
+      <Grid item>
         <Grid
           container
-          direction="row"
+          direction="column"
           justifyContent="center"
           alignItems="flex-start"
           spacing={2}
