@@ -17,31 +17,41 @@ export default function SendexValue(props) {
   }
 
   return (
-    <Stack
-      direction="row"
-      justifyContent="space-around"
-      alignItems="center"
-      spacing={2}
-      sx={{
-        width: 1,
-      }}
-    >
+    <Stack direction="row" justifyContent="space-around" spacing={20}>
       <Box
-        component="span"
-        sx={{ p: 2, border: "1px solid white", width: "33%" }}
+        sx={{
+          p: 2,
+          border: "1px solid white",
+          width: "33%",
+          borderRadius: "16px",
+        }}
       >
         <Stack direction="column" alignItems="center" spacing={2}>
           <Typography variant="h4">{"Today"}</Typography>
           <Typography variant="h3">{sendexValues[0]}</Typography>
         </Stack>
       </Box>
-      <Box sx={{ p: 2, border: "1px solid white" }}>
+      <Box
+        sx={{
+          p: 2,
+          border: "1px solid white",
+          width: "33%",
+          borderRadius: "16px",
+        }}
+      >
         <Stack direction="column" alignItems="center" spacing={2}>
           <Typography variant="h4">{"Tomorrow"}</Typography>
           <Typography variant="h3">{sendexValues[1]}</Typography>
         </Stack>
       </Box>
-      <Box sx={{ p: 2, border: "1px solid white" }}>
+      <Box
+        sx={{
+          p: 2,
+          border: "1px solid white",
+          width: "33%",
+          borderRadius: "16px",
+        }}
+      >
         <Stack direction="column" alignItems="center" spacing={2}>
           <Typography variant="h4">{"2morrow"}</Typography>
           <Typography variant="h3">{sendexValues[2]}</Typography>

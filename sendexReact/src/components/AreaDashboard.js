@@ -20,7 +20,8 @@ import axios from "axios";
 import DashboardContent from "./DashboardContent";
 import { climbingAreas } from "../config/areaConfigData";
 
-const drawerWidth = 300;
+const drawerWidth = "15%";
+const drawerWidthMin = 300;
 
 function AreaDashboard(props) {
   const { window } = props;
@@ -114,8 +115,11 @@ function AreaDashboard(props) {
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: {
+            sm: `calc(100% - ${drawerWidthMin}px)`,
+            lg: `calc(100% - ${drawerWidth}px)`,
+          },
+          ml: { sm: `${drawerWidthMin}px`, lg: `calc(${drawerWidth}px)` },
         }}
       >
         <Toolbar>
@@ -135,7 +139,10 @@ function AreaDashboard(props) {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{
+          width: { sm: drawerWidthMin, lg: drawerWidth },
+          flexShrink: { sm: 0 },
+        }}
         aria-label="mailbox folders"
       >
         <Drawer
@@ -150,7 +157,7 @@ function AreaDashboard(props) {
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
+              width: drawerWidthMin,
             },
           }}
         >

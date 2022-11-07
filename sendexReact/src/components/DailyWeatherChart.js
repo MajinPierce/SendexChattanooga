@@ -1,10 +1,10 @@
 import React from "react";
+
 import {
   CartesianGrid,
   Legend,
   Line,
   LineChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -41,7 +41,12 @@ export default function DailyWeatherChart(props) {
       <CartesianGrid strokeDasharray="2" />
       <XAxis dataKey="dt" tickFormatter={formatDate} />
       <YAxis />
-      <Tooltip offset={50} allowEscapeViewBox={{ x: false, y: true }} />
+      <Tooltip
+        offset={50}
+        allowEscapeViewBox={{ x: false, y: false }}
+        labelStyle={{ color: "#121212" }}
+        labelFormatter={formatDate}
+      />
       <Legend />
       <Line
         name="Max Temp"
