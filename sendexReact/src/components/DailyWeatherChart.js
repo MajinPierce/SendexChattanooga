@@ -38,16 +38,81 @@ export default function DailyWeatherChart(props) {
         bottom: 5,
       }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
+      <CartesianGrid strokeDasharray="1" />
       <XAxis dataKey="dt" tickFormatter={formatDate} />
       <YAxis />
-      <Tooltip />
+      <Tooltip offset={50} allowEscapeViewBox={{ x: false, y: true }} />
       <Legend />
       <Line
+        name="Max Temp"
+        unit="F"
         type="monotone"
-        dataKey="temp.day"
+        dataKey="temp.max"
+        stroke="#F45B69"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Min Temp"
+        unit="F"
+        type="monotone"
+        dataKey="temp.min"
+        stroke="#456990"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Humidity"
+        unit="%"
+        type="monotone"
+        dataKey="humidity"
+        stroke="#629677"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Cloud Cover"
+        unit="%"
+        type="monotone"
+        dataKey="clouds"
+        stroke="#ADADAD"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Precipitation Chance"
+        unit="%"
+        type="monotone"
+        dataKey="pop"
+        stroke="#FFE882"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Precipitation Intensity"
+        unit="mm/hr"
+        type="monotone"
+        dataKey="rain"
         stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Humidity"
+        unit="%"
+        type="monotone"
+        dataKey="humidity"
+        stroke="#AB00B8"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Dew Point"
+        type="monotone"
+        dataKey="dew_point"
+        stroke="#684A52"
+        activeDot={{ r: 5 }}
+      />
+      <Line
+        name="Wind Speed"
+        unit="mph"
+        type="monotone"
+        dataKey="wind_speed"
+        stroke="#77A6B6"
+        activeDot={{ r: 5 }}
       />
     </LineChart>
   );
