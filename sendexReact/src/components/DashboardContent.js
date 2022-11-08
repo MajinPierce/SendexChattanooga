@@ -13,6 +13,7 @@ export default function DashboardContent(props) {
       justifyContent="flex-start"
       alignItems="center"
       spacing={10}
+      width={"100%"}
     >
       <Grid item>
         <Typography variant="h2" component="div" align="center">
